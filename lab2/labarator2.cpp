@@ -1,6 +1,6 @@
 #include <iostream>
 
-int gcd(int a, int b) {
+int lcm(int a, int b) {
     int c = a, d = b;
     while (b != 0) {
         int temp = b;
@@ -16,7 +16,7 @@ int main() {
     std::cout << "input 2 number: ";
     std::cin >> num1 >> num2;
     
-    int result = gcd(num1, num2);
+    int result = lcm(num1, num2);
     
     std::cout << "Result: " << result << std::endl;
     
