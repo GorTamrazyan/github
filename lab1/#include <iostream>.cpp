@@ -6,7 +6,7 @@ int gcd(int a, int b) {
         b = a % b;
         a = temp;
     }
-    return a;
+    return c*a/ b;
 }
 
 int main() {
