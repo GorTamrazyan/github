@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <algorithm>
+
+bool 
+canGraphExist(const std::vector<int>& degrees) 
+{
+    int sumDegrees = std::accumulate(degrees.begin(), degrees.end(), 0);
+    return sumDegrees % 2 == 0;
+}
+
+bool 
+constructGraph(std::vector<int>& koxer, std::vector<std::pair<int, int>>& edges) 
+{
+    int n = koxer.size();
+    std::vector<int> gagatner(n);
+    for (int i = 0; i < n; ++i) {
+        gagatner[i] = i;
+    }
+
+    while (true) {
+        std::sort(gagatner.begin(), gagatner.end(), [&](int a, int b) {
+            return koxer[a] > koxer[b];
+        });
+        if (koxer[gagatner[0]] == 0) break;
+
+        int gagat = gagatner[0];
+        int degree = koxer[gagat];
+
+        for (int i = 1; i <= degree; ++i) {
+            int neighbor = gagatner[i];
+            edges.emplace_back(gagat, neighbor);
+
+            --koxer[gagat];
+            --koxer[neighbor];
+        }
+    }
+
+    return true;
+}
+
+int 
+main() 
+{
+    std::vector<int> degrees;
+    degrees.insert(degrees.end(), 8, 3);
+    degrees.insert(degrees.end(), 11, 4);
+    degrees.insert(degrees.end(), 10, 5);
+
+    if (!canGraphExist(degrees)) {
+        std::cout << "Граф не может существовать." << std::endl;
+        return 0;
+    }
+
+    std::vector<std::pair<int, int>> edges;
+    constructGraph(degrees, edges);
+    std::cout << "Граф может существовать. Рёбра графа:" << std::endl;
+    for (const auto& edge : edges) {
+        std::cout << "(" << edge.first << ", " << edge.second << ")" << std::endl;
+    }
+
+    return 0;
+}
