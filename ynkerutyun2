@@ -1,0 +1,43 @@
+#include <iostream>
+
+bool 
+hasFourWithSameDegree(int totalStudents, int minFriends, int maxFriends) 
+{
+    int range = maxFriends - minFriends + 1;
+    int maxPerDegree = 3;
+
+    if (totalStudents > range * maxPerDegree) {
+        return true;
+    }
+
+    int oddDegrees = 0;
+    for (int degree = minFriends; degree <= maxFriends; ++degree) {
+        if (degree % 2 != 0) {
+            oddDegrees++;
+        }
+    }
+
+    int totalOddDegreeStudents = oddDegrees * maxPerDegree;
+
+    if (totalOddDegreeStudents % 2 != 0) {
+        return true;
+    }
+
+    return false;
+}
+
+int 
+main() 
+{
+    int totalStudents = 102;
+    int minFriends = 68;
+    int maxFriends = 101;
+
+    if (hasFourWithSameDegree(totalStudents, minFriends, maxFriends)) {
+        std::cout << "Доказано: Среди учеников найдутся четверо с одинаковым числом знакомых." << std::endl;
+    } else {
+        std::cout << "Ошибка: Возможна неверная интерпретация условий." << std::endl;
+    }
+
+    return 0;
+}
